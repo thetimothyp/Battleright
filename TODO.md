@@ -12,3 +12,6 @@
 ###Front End:
 - Create textarea that takes BBCode input and sends it to back end
   - Update BBCode to HTML on server response
+
+###Extra Stuff:
+- Analytics (popular champions, etc.)
