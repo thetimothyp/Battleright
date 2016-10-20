@@ -68,6 +68,9 @@ router.route('/champions/:champ_id')
 		Champion.findById(req.params.champ_id, function(err, champion) {
 			if (err) { res.send(err); }
 			champion.name = req.body.name;
+			champion.job = req.body.job;
+			champion.portraitURL = req.body.portraitURL;
+			champion.bio = req.body.bio;
 
 			champion.save(function(err) {
 				if (err) { res.send(err); }
