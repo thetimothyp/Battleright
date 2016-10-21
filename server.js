@@ -63,7 +63,9 @@ router.route('/champions')
 router.route('/champions/:champ_id')
 
 	.get(function(req, res) {
-		Champion.findById(req.params.champ_id, function(err, champion) {
+		Champion.find({
+			name: req.params.champ_id
+		}, function(err, champion) {
 			if (err) { res.send(err); }
 
 			res.json(champion);
@@ -95,6 +97,10 @@ router.route('/champions/:champ_id')
 			res.json({ message: 'Successfully deleted.' });
 		});
 	});
+
+// ==========================
+// ROUTES FOR CHAMPION-SPECIFIC BATTLERITES
+// ==========================
 
 router.route('/champions/:champ_id/battlerites')
 
