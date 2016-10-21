@@ -6,9 +6,8 @@ var Schema = mongoose.Schema;
 var ChampionSchema = new Schema({
 	name: String,
 	job: String,
-	portraitURL: String,
+	portrait_url: String,
 	bio: String,
-	battlerites: [Schema.Types.ObjectId]
 });
 
 module.exports = mongoose.model('Champion', ChampionSchema);

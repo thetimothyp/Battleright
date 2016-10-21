@@ -5,8 +5,8 @@ var Schema = mongoose.Schema;
 
 var BattleriteSchema = new Schema({
 	name: String,
-	champ: String,
-	portraitURL: String,
+	champ_id: String,
+	portrait_url: String,
 	desc: String,
 	tier: Number,
 	type: String
