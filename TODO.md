@@ -3,7 +3,7 @@
 ###Back End:
 - Flesh out database structure
   - Add Abilities to Champions
-  - Add Battlerites to Champions
+  - ~~Add Battlerites to Champions~~
 - Update routes to reflect abilities and battlerites
   - .../champions/:champ_id/battlerites{/:battlerite_id}
   - .../champions/:champ_id/abilities{/:ability_id}
