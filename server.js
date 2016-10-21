@@ -4,6 +4,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Champion = require('./app/models/champion');
+var Battlerite = require('./app/models/battlerite');
 
 // Connect to database
 mongoose.connect('mongodb://admin:root@ds047146.mlab.com:47146/battleright');
@@ -28,6 +29,10 @@ router.get('/', function(req, res) {
 	res.json({ message: 'welcome to our api :)' });
 });
 
+// ==========================
+// ROUTES FOR CHAMPIONS
+// ==========================
+
 // Routes that end in /champions
 router.route('/champions')
 
@@ -37,6 +42,7 @@ router.route('/champions')
 		champ.job = req.body.job;
 		champ.portraitURL = req.body.portraitURL;
 		champ.bio = req.body.bio;
+		champ.battlerites = req.body.battlerites;
 	
 		champ.save(function(err) {
 			if (err) { res.send(err); }
@@ -53,6 +59,7 @@ router.route('/champions')
 		});
 	});
 
+
 // Routes for a single champion
 router.route('/champions/:champ_id')
 
@@ -67,10 +74,11 @@ router.route('/champions/:champ_id')
 	.put(function(req, res) {
 		Champion.findById(req.params.champ_id, function(err, champion) {
 			if (err) { res.send(err); }
-			champion.name = req.body.name;
-			champion.job = req.body.job;
-			champion.portraitURL = req.body.portraitURL;
-			champion.bio = req.body.bio;
+			if (req.body.name) champion.name = req.body.name;
+			if (req.body.job) champion.job = req.body.job;
+			if (req.body.portraitURL) champion.portraitURL = req.body.portraitURL;
+			if (req.body.bio) champion.bio = req.body.bio;
+			if (req.body.battlerites) champion.battlerites = req.body.battlerites;
 
 			champion.save(function(err) {
 				if (err) { res.send(err); }
@@ -84,6 +92,76 @@ router.route('/champions/:champ_id')
 		Champion.remove({
 			_id: req.params.champ_id
 		}, function(err, champion) {
+			if (err) { res.send(err); }
+
+			res.json({ message: 'Successfully deleted.' });
+		});
+	});
+
+// ==========================
+// ROUTES FOR BATTLERITES
+// ==========================
+
+router.route('/battlerites')
+
+	.post(function(req, res) {
+		var battlerite = new Battlerite();
+		battlerite.name = req.body.name;
+		battlerite.champ = req.body.champ;
+		battlerite.portraitURL = req.body.portraitURL;
+		battlerite.desc = req.body.desc;
+		battlerite.tier = req.body.tier;
+		battlerite.type = req.body.type;
+
+		battlerite.save(function(err) {
+			if (err) { res.send(err); }
+
+			res.json({ message: 'Battlerite created!' });
+		});
+	})
+
+	.get(function(req, res) {
+		Battlerite.find(function(err, battlerites) {
+			if (err) { res.send(err); }
+
+			res.json(battlerites);
+		})
+	});
+
+// Routes for a single Battlerite
+
+router.route('/battlerites/:br_id')
+
+	.get(function(req, res) {
+		Battlerite.findById(req.params.br_id, function(err, battlerite) {
+			if (err) { res.send(err); }
+
+			res.json(battlerite);
+		});
+	})
+
+	.put(function(req, res) {
+		Battlerite.findById(req.params.br_id, function(err, battlerite) {
+			if (err) { res.send(err); }
+			if (req.body.name) battlerite.name = req.body.name;
+			if (req.body.champ) battlerite.champ = req.body.champ;
+			if (req.body.portraitURL) battlerite.portraitURL = req.body.portraitURL;
+			if (req.body.desc) battlerite.desc = req.body.desc;
+			if (req.body.tier) battlerite.tier = req.body.tier;
+			if (req.body.type) battlerite.type = req.body.type;
+
+			battlerite.save(function(err) {
+				if (err) { res.send(err); }
+
+				res.json({ message: 'Battlerite updated!' });
+			});
+		});
+	})
+
+	.delete(function(req, res) {
+		Battlerite.remove({
+			_id: req.params.br_id
+		}, function(err, battlerite) {
 			if (err) { res.send(err); }
 
 			res.json({ message: 'Successfully deleted.' });

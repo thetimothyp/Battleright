@@ -7,7 +7,8 @@ var ChampionSchema = new Schema({
 	name: String,
 	job: String,
 	portraitURL: String,
-	bio: String
+	bio: String,
+	battlerites: [Schema.Types.ObjectId]
 });
 
 module.exports = mongoose.model('Champion', ChampionSchema);
