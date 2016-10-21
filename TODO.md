@@ -2,6 +2,8 @@
 
 ###Back End:
 - Flesh out database structure
+  - Add Users model
+    - Add User authentication
   - Add Abilities to Champions
   - ~~Add Battlerites to Champions~~
 - Update routes to reflect abilities and battlerites
