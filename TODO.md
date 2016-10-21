@@ -5,7 +5,8 @@
   - Add Abilities to Champions
   - ~~Add Battlerites to Champions~~
 - Update routes to reflect abilities and battlerites
-  - .../champions/:champ_id/battlerites{/:battlerite_id}
+  - ~~.../champions/:champ_id/battlerites{/:battlerite_id}~~
+    - Replace champ_id and br_id with champ_name and br_name for clarity
   - .../champions/:champ_id/abilities{/:ability_id}
 - Write BBCode parser
   
