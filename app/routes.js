@@ -1,6 +1,8 @@
 var path = require('path');
 var XBBCODE = require('./services/parser/xbbcode');
 
+var Guide = require('./models/guide');
+
 module.exports = function(app, passport) {
 
 	// =======================
@@ -53,18 +55,76 @@ module.exports = function(app, passport) {
 	// =======================
 	// EDIT / PREVIEW
 	// =======================
-	app.get('/edit', isLoggedIn, function(req, res) {
-		res.render('edit.ejs');
-	});
-
-	app.post('/preview', isLoggedIn, processEdits, function(req, res) {
-		
-		res.render('preview.ejs', {
-			title : req.body.title,
-			body : req.body.content,
-			guide_title: req.body.guide_title
+	// must be logged in to create a guide
+	app.get('/create', isLoggedIn, function(req, res) {
+		res.render('create.ejs', {
+			user : req.user
 		});
 	});
+
+	app.post('/guides', isLoggedIn, processEdits, function(req, res) {
+		var guide = new Guide();
+		guide.title = req.body.title;
+		guide.champion = req.body.champion;
+		for (var i = 0; i < req.body.ch_title.length; i++) {
+			var ch = {
+				title: req.body.ch_title[i],
+				body: req.body.ch_body[i]
+			}
+			guide.chapters.push(ch);
+		}
+		guide.user = req.user._id; // enable when isLoggedIn is active
+
+		guide.save(function(err) {
+			if(err) { res.send(err); }
+			res.redirect('/guides/' + guide._id);
+		})
+	});
+
+	app.get('/guides/:guide_id', function(req, res) {
+		Guide.findById(req.params.guide_id, function(err, guide) {
+			if(err) res.send(err);
+			res.render('preview.ejs', {
+				guide : guide,
+				XBBCODE : XBBCODE
+			});
+		});
+	})
+
+	app.get('/guides/:guide_id/edit', isLoggedIn, function(req, res) {
+		Guide.findById(req.params.guide_id, function(err, guide) {
+			if(err) res.send(err);
+			res.render('edit.ejs', {
+				guide : guide
+			});
+		});
+	})
+
+	app.post('/guides/:guide_id/edit', isLoggedIn, function(req, res) {
+		Guide.findById(req.params.guide_id, function(err, guide) {
+			if(err) res.send(err);
+
+			guide.title = req.body.title;
+			guide.champion = req.body.champion;
+			for (var i = 0; i < req.body.ch_title.length; i++) {
+				var ch = {
+					title: req.body.ch_title[i],
+					body: req.body.ch_body[i]
+				}
+				if (i < guide.chapters.length) {
+					guide.chapters[i] = ch;
+				} else {
+					guide.chapters.push(ch);
+				}
+			}
+
+			guide.save(function(err) {
+				if(err) { res.send(err); }
+				res.redirect('/guides/' + guide._id);
+			});
+		})
+
+	})
 
 	// =======================
 	// LOGOUT
@@ -85,17 +145,9 @@ function isLoggedIn(req, res, next) {
 }
 
 function processEdits(req, res, next) {
-	if( Object.prototype.toString.call(req.body.content) === '[object Array]' ) {
-	    req.body.content = req.body.content.map(function(raw) {
-			return XBBCODE.process({
-				text: raw,
-				removeMisalignedTags: false,
-				addInLineBreaks: false
-			}).html;
-		});
-	} else {
-		req.body.content = [].concat(req.body.content);
-		req.body.title = [].concat(req.body.title);
+	if( Object.prototype.toString.call(req.body.content) != '[object Array]' ) {
+		req.body.ch_body = [].concat(req.body.ch_body);
+		req.body.ch_title = [].concat(req.body.ch_title);
 	}
 
 	return next();
