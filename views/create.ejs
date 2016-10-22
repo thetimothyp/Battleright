@@ -1,4 +1,4 @@
-<!-- views/edit.ejs -->
+<!-- views/create.ejs -->
 <!doctype html>
 <html>
 <head>
@@ -19,21 +19,18 @@
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6 col-sm-offset-3">
                 
-            <button type="submit" form="guide" class="btn btn-primary btn-lg">Update</button>
+            <button type="submit" form="guide" class="btn btn-primary btn-lg">Preview</button>
 
             <hr>
             <div id="chapters">
-                <form action="/guides/<%=guide._id%>/edit" method="post" id="guide">
-                    Guide Title: <input type="text" name="title" value="<%= guide.title %>"><hr>
-                    Champion: <input type="text" name="champion" value="<%= guide.champion %>">
-                    <% for (var i = 0; i < guide.chapters.length; i++) { %>
-                    <div id="ch<%=i%>">
-                        <hr>
-                        Chapter Title: <input type="text" name="ch_title" value="<%= guide.chapters[i].title %>">
+                <form action="/guides" method="post" id="guide">
+                    Guide Title: <input type="text" name="title"><hr>
+                    Champion: <input type="text" name="champion"><hr>
+                    <div id="ch1">
+                        Chapter Title: <input type="text" name="ch_title">
                         <br><br>
-                        <textarea rows="10" cols="50" name="ch_body" style="width: 100%;"><%= guide.chapters[i].body %></textarea>
+                        <textarea rows="10" cols="50" name="ch_body" style="width: 100%;"></textarea>
                     </div>
-                    <% } %>
                 </form>
             </div>
             <hr>

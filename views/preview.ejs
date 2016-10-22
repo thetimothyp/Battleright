@@ -18,14 +18,19 @@
 
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6 col-sm-offset-3">
-            <button type="submit" class="btn btn-primary btn-lg" onClick="history.go(-1);return true;">Edit</button>
+            <a href="/guides/<%= guide._id %>/edit" class="btn btn-primary">Edit</a>
             <hr>
             <div class="well">
-                <h2><%= guide_title %></h2>
-                <% for (var i = 0; i < title.length; i++) {%>
+                <h2><%= guide.title %></h2>
+                <h3><%= guide.champion %></h3>
+                <% for (var i = 0; i < guide.chapters.length; i++) {%>
                     <hr>
-                    <h3><%= title[i] %></h3>
-                    <p><%- body[i] %></p>
+                    <h3><%= guide.chapters[i].title %></h3>
+                    <p><%- XBBCODE.process({
+                        text: guide.chapters[i].body,
+                        removeMisalignedTags: false,
+                        addInLineBreaks: false
+                    }).html%></p>
                 <% } %>
             </div>
         </div>
@@ -33,5 +38,7 @@
     </div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </body>
 </html>
