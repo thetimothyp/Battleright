@@ -6,7 +6,7 @@
     - ~~Add User authentication~~
     - Add Edit operation
       - Implement Edit for a single chapter
-        - Title for chapter
+        - ~~Title for chapter~~
         - ~~Body for chapter~~
       - Add functionality to add additional chapters
     - Add Save operation (save guide to user)
