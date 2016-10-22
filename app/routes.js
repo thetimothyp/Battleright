@@ -59,6 +59,7 @@ module.exports = function(app, passport) {
 
 	app.post('/preview', isLoggedIn, function(req, res) {
 		res.render('preview.ejs', {
+			title : req.body.title,
 			body : XBBCODE.process({
 				text: req.body.content,
 				removeMisalignedTags: false,
