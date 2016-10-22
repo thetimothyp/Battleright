@@ -3,16 +3,34 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var morgan = require('morgan');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var flash = require('connect-flash');
+var path = require('path');
+
+// Initialize model variables
 var Champion = require('./app/models/champion');
 var Battlerite = require('./app/models/battlerite');
 
 // Connect to database
 mongoose.connect('mongodb://admin:root@ds047146.mlab.com:47146/battleright');
+require('./config/passport')(passport); // pass passport for configuration
 
-// Configure app to use bodyParser()
-// This allows us to get data from POST
-app.use(bodyParser.urlencoded({ extended: true }));
+// ===========================
+// Configure app
+// ===========================
+
+app.use(morgan('dev')); // log every req to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser.urlencoded({ extended: true })); // Use bodyParser to get data from POST
 app.use(bodyParser.json());
+app.use(session({ secret: 'C30C7A73-5E4D-4291-9630-35FF28FB819B' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
 
 var port = process.env.PORT || 9000;
 
@@ -199,6 +217,7 @@ router.route('/battlerites/:br_id')
 
 // Register our routes
 app.use('/api', router);
+require('./app/routes.js')(app, passport);
 
 // Start server
 app.listen(port);

@@ -1,0 +1,32 @@
+<!-- views/edit.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Battleright</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1>Edit Guide</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6 col-sm-offset-3">
+                
+            <form action="/preview" method="post" id="guide">
+                <button type="submit" class="btn btn-primary btn-lg">Preview</button>
+            </form>
+            <textarea rows="10" cols="50" name="content" form="guide" style="width: 100%;"></textarea>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
