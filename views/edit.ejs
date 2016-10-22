@@ -19,18 +19,18 @@
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6 col-sm-offset-3">
                 
-            <button type="submit" form="chapter1" class="btn btn-primary btn-lg">Preview</button>
+            <button type="submit" form="guide" class="btn btn-primary btn-lg">Preview</button>
 
             <hr>
-            <ul id="chapters">
-                <li class="chapter" id="ch1">
-                    <form action="/preview" method="post" id="chapter1">
+            <div id="chapters">
+                <form action="/preview" method="post" id="guide">
+                    <div id="ch1">
                         Chapter Title: <input type="text" name="title">
                         <br><br>
                         <textarea rows="10" cols="50" name="content" style="width: 100%;"></textarea>
-                    </form>
-                </li>
-            </ul>
+                    </div>
+                </form>
+            </div>
             <hr>
             <button class="btn btn-primary btn-lg add-more" style="float:right">Add Chapter</button>
 

@@ -58,13 +58,26 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/preview', isLoggedIn, function(req, res) {
+		console.log(req.body);
+		var body;
+		var title;
+		if( Object.prototype.toString.call(req.body.content) === '[object Array]' ) {
+		    body = req.body.content.map(function(raw) {
+				return XBBCODE.process({
+					text: raw,
+					removeMisalignedTags: false,
+					addInLineBreaks: false
+				}).html;
+			});
+			title = req.body.title;
+		} else {
+			body = [].concat(req.body.content);
+			title = [].concat(req.body.title);
+		}
+		
 		res.render('preview.ejs', {
-			title : req.body.title,
-			body : XBBCODE.process({
-				text: req.body.content,
-				removeMisalignedTags: false,
-				addInLineBreaks: false
-			}).html
+			title : title,
+			body : body
 		});
 	});
 

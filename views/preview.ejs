@@ -21,9 +21,11 @@
             <button type="submit" class="btn btn-primary btn-lg" onClick="history.go(-1);return true;">Edit</button>
             <hr>
             <div class="well">
-                <h3><%= title %></h3>
-                <hr>
-                <p><%- body %></p>
+                <% for (var i = 0; i < title.length; i++) {%>
+                    <h3><%= title[i] %></h3>
+                    <p><%- body[i] %></p>
+                    <hr>
+                <% } %>
             </div>
         </div>
 
