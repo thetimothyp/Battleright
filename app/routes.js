@@ -52,14 +52,36 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/profile/guides', isLoggedIn, function(req, res) {
+		Guide.find({
+			user: req.user._id
+		}, function(err, guides) {
+			console.log(guides);
+			if (err) { res.send(err); }
+			res.render('my_guides.ejs', {
+				guides : guides
+			});
+		});
+	});
+
 	// =======================
-	// EDIT / PREVIEW
+	// USER'S GUIDES
 	// =======================
 	// must be logged in to create a guide
 	app.get('/create', isLoggedIn, function(req, res) {
 		res.render('create.ejs', {
 			user : req.user
 		});
+	});
+
+	app.get('/guides', isGuideCreator, function(req, res) {
+		Guide.find(function(err, guides) {
+			if (err) { res.send(err); }
+			res.render('guides.ejs', {
+				user : req.user,
+				guides : guides
+			});
+		})
 	});
 
 	app.post('/guides', isLoggedIn, processEdits, function(req, res) {
@@ -81,10 +103,12 @@ module.exports = function(app, passport) {
 		})
 	});
 
-	app.get('/guides/:guide_id', function(req, res) {
+	app.get('/guides/:guide_id', isGuideCreator, function(req, res) {
+		
 		Guide.findById(req.params.guide_id, function(err, guide) {
 			if(err) res.send(err);
-			res.render('preview.ejs', {
+			res.render('view_guide.ejs', {
+				user : req.user._id,
 				guide : guide,
 				XBBCODE : XBBCODE
 			});
@@ -142,6 +166,13 @@ function isLoggedIn(req, res, next) {
 
 	// if not, redirect to index
 	res.redirect('/');
+}
+
+function isGuideCreator(req, res, next) {
+	if (!req.isAuthenticated())
+		req.user = 0;
+
+	return next();
 }
 
 function processEdits(req, res, next) {

@@ -113,6 +113,14 @@ var XBBCODE = (function() {
                 return '';
             }
         },
+        "br": {
+            openTag: function(params,content) {
+                return '<a href="http://www.battlerite.gamepedia.com/' + content + '" target="_blank">';
+            },
+            closeTag: function(params,content) {
+                return '</a>';
+            }
+        },
         "center": {
             openTag: function(params,content) {
                 return '<span class="xbbcode-center">';

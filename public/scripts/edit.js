@@ -1,5 +1,9 @@
 $(document).ready(function() {
-    var next = 1;
+    if (i) {
+        var next = i;
+    } else {
+        var next = 0;
+    }
     $(".add-more").click(function(e){
         e.preventDefault();
         var addto = "#ch" + next;
