@@ -4,6 +4,7 @@
 <head>
     <title>Battleright</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/general.css">
 </head>
 <body>
 <div class='container'>
@@ -20,6 +21,19 @@
         <a href="/signup" class="btn btn-default">Signup</a>
 
 	</div>
+	<div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+            	<h2>Recent Guides</h2><hr>
+                <% for (var i = 0; i < guides.length; i++) { %>
+                    <p><a href="/guides/<%= guides[i]._id %>"><%= guides[i].title %></a></p>
+                <% } %>
+            </div>
+        </div>
+
+    </div>
 </div>
 </body>
 </html>

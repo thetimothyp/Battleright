@@ -9,7 +9,13 @@ module.exports = function(app, passport) {
 	// HOME PAGE (with login links)
 	// =======================
 	app.get('/', function(req, res) {
-		res.render('index.ejs');
+		Guide.find(function(err, guides) {
+			if (err) res.send(err);
+			res.render('index.ejs', {
+				user : req.user,
+				guides : guides
+			});
+		})
 	});
 
 	// =======================
@@ -74,7 +80,7 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	app.get('/guides', isGuideCreator, function(req, res) {
+	app.get('/guides', isUser, function(req, res) {
 		Guide.find(function(err, guides) {
 			if (err) { res.send(err); }
 			res.render('guides.ejs', {
@@ -103,7 +109,7 @@ module.exports = function(app, passport) {
 		})
 	});
 
-	app.get('/guides/:guide_id', isGuideCreator, function(req, res) {
+	app.get('/guides/:guide_id', isUser, function(req, res) {
 		
 		Guide.findById(req.params.guide_id, function(err, guide) {
 			if(err) res.send(err);
@@ -168,7 +174,7 @@ function isLoggedIn(req, res, next) {
 	res.redirect('/');
 }
 
-function isGuideCreator(req, res, next) {
+function isUser(req, res, next) {
 	if (!req.isAuthenticated())
 		req.user = 0;
 
