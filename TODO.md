@@ -25,6 +25,7 @@
 - Implement BBCode parser
   - ~~Parse basic BBCode~~
   - Parse BBCode database queries ([[Croak]], [[SpitSpitSpit]], etc.)
+    - ~~Pseudo-done; [br]Croak[/br] will go to battlerite wikia page for Croak~~
   
 ###Front End:
 - ~~Create textarea that takes BBCode input and sends it to back end~~
