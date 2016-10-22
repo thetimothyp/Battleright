@@ -26,11 +26,19 @@ app.use(morgan('dev')); // log every req to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({ extended: true })); // Use bodyParser to get data from POST
 app.use(bodyParser.json());
-app.use(session({ secret: 'C30C7A73-5E4D-4291-9630-35FF28FB819B' })); // session secret
+app.use(session({ 
+		secret: 'C30C7A73-5E4D-4291-9630-35FF28FB819B' ,
+		cookie : {
+			_expires : 600000
+		}
+	})
+); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+// Set static routes (styles, scripts, etc)
+app.use(express.static(__dirname + '/public'));
 
 var port = process.env.PORT || 9000;
 

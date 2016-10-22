@@ -1,4 +1,5 @@
 var path = require('path');
+var XBBCODE = require('./services/parser/xbbcode');
 
 module.exports = function(app, passport) {
 
@@ -58,7 +59,11 @@ module.exports = function(app, passport) {
 
 	app.post('/preview', isLoggedIn, function(req, res) {
 		res.render('preview.ejs', {
-			body : req.body
+			body : XBBCODE.process({
+				text: req.body.content,
+				removeMisalignedTags: false,
+				addInLineBreaks: false
+			}).html
 		});
 	});
 
