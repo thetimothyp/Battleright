@@ -4,31 +4,59 @@
 <head>
     <title>Battleright</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/general.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Battleright</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="/guides">All Guides</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      	<% if (user == 0) { %>
+	        <li><a href="/login">Login</a></li>
+	        <li><a href="/signup">Sign Up</a></li>
+        <% } else {%>
+        	<li><a href="/profile/guides">My Guides</a></li>
+        	<li><a href="/create">New Guide</a></li>
+        	<li><a href="/profile">Profile</a></li>
+	        <li><a href="/logout">Log Out</a></li>
+        <% } %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
 <div class='container'>
-	<div class='jumbotron text-center'>
-		<h1>Battleright</h1>
-
-		<a href="/guides" class="btn btn-default">View Guides</a>
-
-		<hr>
-
-        <p>Login or Register with:</p>
-
-        <a href="/login" class="btn btn-default">Login</a>
-        <a href="/signup" class="btn btn-default">Signup</a>
-
-	</div>
 	<div class="row">
+		<div class='col-sm-8'>
+			<div class="well">
+				<h3>News</h3>
+				<hr>
+		        <p>We are up and running!</p>
+	        </div>
+		</div>
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="well">
-            	<h2>Recent Guides</h2><hr>
+            	<h3>Latest Guides</h3><hr>
                 <% for (var i = 0; i < guides.length; i++) { %>
-                    <p><a href="/guides/<%= guides[i]._id %>"><%= guides[i].title %></a></p>
+                    <p><a href="/guides/<%= guides[i]._id %>"><%= guides[i].title %></a> by <%= guides[i].author %></p>
                 <% } %>
             </div>
         </div>

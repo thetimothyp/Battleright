@@ -1,0 +1,13 @@
+body {
+	background: url("../images/background.jpg");
+	background-size: 100% auto;
+}
+
+.well {
+	background-color: rgba(40,30,0,0.95);
+	border: none;
+}
+
+.well h1, h3, p {
+	color: white;
+}

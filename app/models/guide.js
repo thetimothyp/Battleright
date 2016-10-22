@@ -7,6 +7,7 @@ var GuideSchema = new Schema({
 	title: String,
 	champion: String,
 	user: String,
+	author: String,
 	chapters: [{
 		title: String,
 		body: String

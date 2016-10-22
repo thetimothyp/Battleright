@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
 	// =======================
 	// HOME PAGE (with login links)
 	// =======================
-	app.get('/', function(req, res) {
+	app.get('/', isUser, function(req, res) {
 		Guide.find(function(err, guides) {
 			if (err) res.send(err);
 			res.render('index.ejs', {
@@ -22,13 +22,16 @@ module.exports = function(app, passport) {
 	// LOGIN
 	// =======================
 	// show login form
-	app.get('/login', function(req, res) {
-		res.render('login.ejs', { message: req.flash('loginMessage') });
+	app.get('/login', isUser, function(req, res) {
+		res.render('login.ejs', { 
+			message: req.flash('loginMessage') ,
+			user : req.user
+		});
 	})
 
 	// process login form
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect : '/profile',
+		successRedirect : '/',
 		failureRedirect : '/login',
 		failureFlash : true
 	}));
@@ -36,8 +39,11 @@ module.exports = function(app, passport) {
 	// =======================
 	// SIGNUP
 	// =======================
-	app.get('/signup', function(req, res) {
-		res.render('signup.ejs', { message: req.flash('signupMessage') });
+	app.get('/signup', isUser, function(req, res) {
+		res.render('signup.ejs', { 
+			message: req.flash('signupMessage') ,
+			user : req.user
+		});
 	});
 
 	// process signup form
@@ -102,6 +108,7 @@ module.exports = function(app, passport) {
 			guide.chapters.push(ch);
 		}
 		guide.user = req.user._id; // enable when isLoggedIn is active
+		guide.author = req.user.local.username;
 
 		guide.save(function(err) {
 			if(err) { res.send(err); }
@@ -175,9 +182,10 @@ function isLoggedIn(req, res, next) {
 }
 
 function isUser(req, res, next) {
-	if (!req.isAuthenticated())
+	if (!req.isAuthenticated()) {
 		req.user = 0;
-
+		req.user._id = 0;
+	}
 	return next();
 }
 
