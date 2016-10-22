@@ -52,15 +52,15 @@ module.exports = function(app, passport) {
 	// =======================
 	// EDIT / PREVIEW
 	// =======================
-	// app.get('/edit', function(req, res) {
-	// 	res.render('edit.ejs');
-	// });
+	app.get('/edit', isLoggedIn, function(req, res) {
+		res.render('edit.ejs');
+	});
 
-	// app.post('/preview', function(req, res) {
-	// 	res.render('preview.ejs', {
-	// 		guide : req.body.guide
-	// 	});
-	// });
+	app.post('/preview', isLoggedIn, function(req, res) {
+		res.render('preview.ejs', {
+			body : req.body
+		});
+	});
 
 	// =======================
 	// LOGOUT

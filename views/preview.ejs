@@ -17,8 +17,10 @@
 
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6 col-sm-offset-3">
+            <button type="submit" class="btn btn-primary btn-lg" onClick="history.go(-1);return true;">Edit</button>
+            <hr>
             <div class="well">
-                <p><% guide.content %></p>
+                <p><%= body.content %></p>
             </div>
         </div>
 
