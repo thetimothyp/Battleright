@@ -1,4 +1,4 @@
-<!-- views/profile.ejs -->
+<!-- views/my_guides.ejs -->
 <!doctype html>
 <html>
 <head>
@@ -13,22 +13,16 @@
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
         <a href="/create" class="btn btn-default btn-sm">Create Guide</a>
         <a href="/profile/guides" class="btn btn-default btn-sm">My Guides</a>
-        <a href="/guides" class="btn btn-default btn-sm">All Guides</a>
     </div>
 
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
+        <div class="col-sm-6 col-sm-offset-3">
             <div class="well">
-                <h3>Local</h3>
-
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-
+                <% for (var i = 0; i < guides.length; i++) { %>
+                    <p><a href="/guides/<%= guides[i]._id %>"><%= guides[i].title %></a></p>
+                <% } %>
             </div>
         </div>
 

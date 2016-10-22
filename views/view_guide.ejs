@@ -1,4 +1,4 @@
-<!-- views/preview.ejs -->
+<!-- views/view_guide.ejs -->
 <!doctype html>
 <html>
 <head>
@@ -10,17 +10,24 @@
 <div class="container">
 
     <div class="page-header text-center">
-        <h1>Edit Guide</h1>
+        <h1>View Guide</h1>
+        <% if (user != 0) { %>
         <a href="/profile" class="btn btn-default btn-sm">Profile</a>
+        <% } else { %>
+        <a href="/login" class="btn btn-default btn-sm">Login</a>
+        <% } %>
+        <a href="/guides" class="btn btn-default btn-sm">All Guides</a>
     </div>
 
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6 col-sm-offset-3">
+            <% if (guide.user == user) { %>
             <a href="/guides/<%= guide._id %>/edit" class="btn btn-primary">Edit</a>
             <hr>
-            <div class="well">
+            <% } %>
+            <div class="well" style="background:#FFF">
                 <h2><%= guide.title %></h2>
                 <h3><%= guide.champion %></h3>
                 <% for (var i = 0; i < guide.chapters.length; i++) {%>
