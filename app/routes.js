@@ -57,27 +57,12 @@ module.exports = function(app, passport) {
 		res.render('edit.ejs');
 	});
 
-	app.post('/preview', isLoggedIn, function(req, res) {
-		console.log(req.body);
-		var body;
-		var title;
-		if( Object.prototype.toString.call(req.body.content) === '[object Array]' ) {
-		    body = req.body.content.map(function(raw) {
-				return XBBCODE.process({
-					text: raw,
-					removeMisalignedTags: false,
-					addInLineBreaks: false
-				}).html;
-			});
-			title = req.body.title;
-		} else {
-			body = [].concat(req.body.content);
-			title = [].concat(req.body.title);
-		}
+	app.post('/preview', isLoggedIn, processEdits, function(req, res) {
 		
 		res.render('preview.ejs', {
-			title : title,
-			body : body
+			title : req.body.title,
+			body : req.body.content,
+			guide_title: req.body.guide_title
 		});
 	});
 
@@ -97,4 +82,21 @@ function isLoggedIn(req, res, next) {
 
 	// if not, redirect to index
 	res.redirect('/');
+}
+
+function processEdits(req, res, next) {
+	if( Object.prototype.toString.call(req.body.content) === '[object Array]' ) {
+	    req.body.content = req.body.content.map(function(raw) {
+			return XBBCODE.process({
+				text: raw,
+				removeMisalignedTags: false,
+				addInLineBreaks: false
+			}).html;
+		});
+	} else {
+		req.body.content = [].concat(req.body.content);
+		req.body.title = [].concat(req.body.title);
+	}
+
+	return next();
 }
