@@ -5,13 +5,15 @@
   - Add Users model
     - ~~Add User authentication~~
     - Add Edit operation
+      - Only user whose guide it is should be able to edit the guide
       - ~~Implement Edit for a single chapter~~
         - ~~Title for chapter~~
         - ~~Body for chapter~~
       - Add functionality to add additional chapters
         - ~~Add chapter in Edit~~
         - ~~View multiple chapters in Preview~~
-        - Show multiple editable chapters when going back to Edit
+        - ~~Show multiple editable chapters when going back to Edit~~
+        - Be able to delete chapters in edit mode
     - Add Save operation (save guide to user)
   - Add Abilities to Champions
   - ~~Add Battlerites to Champions~~
