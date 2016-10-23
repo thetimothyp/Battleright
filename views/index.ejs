@@ -56,7 +56,7 @@
             <div class="well">
             	<h3>Latest Guides</h3><hr>
                 <% for (var i = 0; i < guides.length; i++) { %>
-                    <p><a href="/guides/<%= guides[i]._id %>"><%= guides[i].title %></a> by <%= guides[i].author %></p>
+                    <p><a href="/guides/<%= guides[i].champion %>/<%= guides[i]._id %>"><%= guides[i].title %></a> by <%= guides[i].author %></p>
                 <% } %>
             </div>
         </div>

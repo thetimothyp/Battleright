@@ -1,4 +1,4 @@
-<!-- views/my_guides.ejs -->
+<!-- views/champion_guides.ejs -->
 <!doctype html>
 <html>
 <head>
@@ -48,8 +48,8 @@
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6 col-sm-offset-3">
             <div class="well">
-                <% for (var i = 0; i < champions.length; i++) { %>
-                    <p><a href="/guides/<%= champions[i].name %>"><%= champions[i].name %></a></p>
+                <% for (var i = 0; i < guides.length; i++) { %>
+                    <p><a href="/guides/<%= guides[i].champion %>/<%= guides[i]._id %>"><%= guides[i].title %></a></p>
                 <% } %>
             </div>
         </div>

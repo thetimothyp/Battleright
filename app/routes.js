@@ -91,14 +91,25 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/guides', isUser, function(req, res) {
-		Guide.find(function(err, guides) {
+		Champion.find(function(err, champions) {
 			if (err) { res.send(err); }
 			res.render('guides.ejs', {
 				user : req.user,
-				guides : guides
+				champions : champions
 			});
 		})
 	});
+
+	app.get('/guides/:champion', isUser, function(req, res) {
+		Guide.find({
+			champion : req.params.champion
+		}, function(err, guides) {
+			res.render('champion_guides.ejs', {
+				user : req.user,
+				guides : guides
+			})
+		})
+	})
 
 	app.post('/guides', isLoggedIn, processEdits, function(req, res) {
 		var guide = new Guide();
@@ -120,7 +131,7 @@ module.exports = function(app, passport) {
 		})
 	});
 
-	app.get('/guides/:guide_id', isUser, function(req, res) {
+	app.get('/guides/:champion/:guide_id', isUser, function(req, res) {
 		
 		Guide.findById(req.params.guide_id, function(err, guide) {
 			if(err) res.send(err);
