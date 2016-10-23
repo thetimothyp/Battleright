@@ -45,9 +45,9 @@
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-8">
             <% if (guide.user == user) { %>
-            <a href="/guides/<%= guide._id %>/edit" class="btn btn-primary">Edit</a>
+            <a href="/guides/<%= guide.champion %>/<%= guide._id %>/edit" class="btn btn-primary">Edit</a>
             <hr>
             <% } %>
             <div class="well" style="background:#FFF">
@@ -63,6 +63,13 @@
                     }).html%></p>
                 <% } %>
             </div>
+        </div>
+
+        <div class="col-sm-4">
+            <h4>More <%=guide.champion%> Guides</h4><hr>
+            <% for (var i = 0; i < guides.length; i++) { %>
+                <p><a href="/guides/<%= guides[i].champion %>/<%= guides[i]._id %>"><%= guides[i].title %></a> by <%= guides[i].author %></p>
+            <% } %>
         </div>
 
     </div>

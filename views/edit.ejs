@@ -23,7 +23,7 @@
 
             <hr>
             <div id="chapters">
-                <form action="/guides/<%=guide._id%>/edit" method="post" id="guide">
+                <form action="/guides/<%=guide.champion%>/<%=guide._id%>/edit" method="post" id="guide">
                     Guide Title: <input type="text" name="title" value="<%= guide.title %>"><hr>
                     Champion: <%= guide.champion %>
                     <% for (var i = 0; i < guide.chapters.length; i++) { %>

@@ -127,7 +127,7 @@ module.exports = function(app, passport) {
 
 		guide.save(function(err) {
 			if(err) { res.send(err); }
-			res.redirect('/guides/' + guide._id);
+			res.redirect('/guides/' + guide.champion + '/' + guide._id);
 		})
 	});
 
@@ -135,15 +135,20 @@ module.exports = function(app, passport) {
 		
 		Guide.findById(req.params.guide_id, function(err, guide) {
 			if(err) res.send(err);
-			res.render('view_guide.ejs', {
-				user : req.user._id,
-				guide : guide,
-				XBBCODE : XBBCODE
-			});
+			Guide.find({
+				champion : guide.champion,
+			}, function(err, guides) {
+				res.render('view_guide.ejs', {
+					user : req.user._id,
+					guide : guide,
+					XBBCODE : XBBCODE,
+					guides : guides
+				});
+			}).limit(10);
 		});
 	})
 
-	app.get('/guides/:guide_id/edit', isLoggedIn, function(req, res) {
+	app.get('/guides/:champion/:guide_id/edit', isLoggedIn, function(req, res) {
 		Guide.findById(req.params.guide_id, function(err, guide) {
 			if(err) res.send(err);
 			res.render('edit.ejs', {
@@ -152,12 +157,11 @@ module.exports = function(app, passport) {
 		});
 	})
 
-	app.post('/guides/:guide_id/edit', isLoggedIn, function(req, res) {
+	app.post('/guides/:champion/:guide_id/edit', isLoggedIn, function(req, res) {
 		Guide.findById(req.params.guide_id, function(err, guide) {
 			if(err) res.send(err);
 
 			guide.title = req.body.title;
-			guide.champion = req.body.champion;
 			for (var i = 0; i < req.body.ch_title.length; i++) {
 				var ch = {
 					title: req.body.ch_title[i],
@@ -172,7 +176,7 @@ module.exports = function(app, passport) {
 
 			guide.save(function(err) {
 				if(err) { res.send(err); }
-				res.redirect('/guides/' + guide._id);
+				res.redirect('/guides/' + guide.champion + '/' + guide._id);
 			});
 		})
 

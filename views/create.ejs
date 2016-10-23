@@ -7,19 +7,45 @@
     <link rel="stylesheet" type="text/css" href="/css/edit.css">
 </head>
 <body>
-<div class="container">
-
-    <div class="page-header text-center">
-        <h1>Edit Guide</h1>
-        <a href="/profile" class="btn btn-default btn-sm">Profile</a>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Battleright</a>
     </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/guides">All Guides</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if (user == 0) { %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+        <% } else {%>
+            <li><a href="/profile/guides">My Guides</a></li>
+            <li class="active"><a href="/create">New Guide</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Log Out</a></li>
+        <% } %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
 
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-8 col-sm-offset-2">
-                
-            <button type="submit" form="guide" class="btn btn-primary btn-lg">Submit</button>
 
             <hr>
             <div id="chapters">
@@ -42,7 +68,9 @@
                 </form>
             </div>
             <hr>
-            <button class="btn btn-primary btn-lg add-more" style="float:right">Add Chapter</button>
+            <button class="btn btn-primary btn-lg add-more">Add Chapter</button>
+            <hr>
+            <button type="submit" form="guide" class="btn btn-primary btn-lg">Submit</button>
 
         </div>
 
