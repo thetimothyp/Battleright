@@ -17,7 +17,7 @@
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-8 col-sm-offset-2">
                 
             <button type="submit" form="guide" class="btn btn-primary btn-lg">Update</button>
 
@@ -25,7 +25,7 @@
             <div id="chapters">
                 <form action="/guides/<%=guide._id%>/edit" method="post" id="guide">
                     Guide Title: <input type="text" name="title" value="<%= guide.title %>"><hr>
-                    Champion: <input type="text" name="champion" value="<%= guide.champion %>">
+                    Champion: <%= guide.champion %>
                     <% for (var i = 0; i < guide.chapters.length; i++) { %>
                     <div id="ch<%=i%>">
                         <hr>
@@ -33,7 +33,7 @@
                         <br><br>
                         <textarea rows="10" cols="50" name="ch_body" style="width: 100%;"><%= guide.chapters[i].body %></textarea>
                     </div>
-                    <script>var i = <%=i%>;</script>
+                    <script>var i = <%=guide.chapters.length-1%>;</script>
                     <% } %>
                 </form>
             </div>

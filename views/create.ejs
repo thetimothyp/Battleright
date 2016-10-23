@@ -17,7 +17,7 @@
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-8 col-sm-offset-2">
                 
             <button type="submit" form="guide" class="btn btn-primary btn-lg">Submit</button>
 
@@ -25,7 +25,14 @@
             <div id="chapters">
                 <form action="/guides" method="post" id="guide">
                     Guide Title: <input type="text" name="title"><hr>
-                    Champion: <input type="text" name="champion"><hr>
+                    Champion: 
+                    <select name="champion">
+                        <% for (var i = 0; i < champions.length; i++) { %>
+                            <option value="<%=champions[i].name%>"><%=champions[i].name%></option>
+                        <% } %>
+                    </select>
+
+                    <hr>
                     <div id="ch0">
                         Chapter Title: <input type="text" name="ch_title">
                         <br><br>

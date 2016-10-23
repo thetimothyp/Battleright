@@ -45,13 +45,13 @@
     <div class="row">
 
         <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-8 col-sm-offset-2">
             <% if (guide.user == user) { %>
             <a href="/guides/<%= guide._id %>/edit" class="btn btn-primary">Edit</a>
             <hr>
             <% } %>
             <div class="well" style="background:#FFF">
-                <h2><%= guide.title %></h2><h4> by <%= guide.author %></h4>
+                <h2 style="display:inline"><%= guide.title %></h2><h4 style="display:inline"> by <%= guide.author %></h4>
                 <h3><%= guide.champion %></h3>
                 <% for (var i = 0; i < guide.chapters.length; i++) {%>
                     <hr>

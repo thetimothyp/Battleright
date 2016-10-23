@@ -2,6 +2,7 @@ var path = require('path');
 var XBBCODE = require('./services/parser/xbbcode');
 
 var Guide = require('./models/guide');
+var Champion = require('./models/champion');
 
 module.exports = function(app, passport) {
 
@@ -81,9 +82,12 @@ module.exports = function(app, passport) {
 	// =======================
 	// must be logged in to create a guide
 	app.get('/create', isLoggedIn, function(req, res) {
-		res.render('create.ejs', {
-			user : req.user
-		});
+		Champion.find(function(err, champions) {
+			res.render('create.ejs', {
+				user : req.user,
+				champions : champions
+			});
+		})
 	});
 
 	app.get('/guides', isUser, function(req, res) {
