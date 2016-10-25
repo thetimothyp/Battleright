@@ -91,11 +91,11 @@ module.exports = function(app) {
 	// ROUTES FOR CHAMPION-SPECIFIC BATTLERITES
 	// ==========================
 
-	router.route('/champions/:champ_id/battlerites')
+	router.route('/champions/:champ/battlerites')
 
 		.get(function(req, res) {
 			Battlerite.find({
-				champ_id: req.params.champ_id
+				champion: req.params.champ
 			}, function(err, battlerites) {
 				if (err) { res.send(err); }
 
@@ -103,11 +103,11 @@ module.exports = function(app) {
 			});
 		});
 
-	router.route('/champions/:champ_id/battlerites/:br_id')
+	router.route('/champions/:champ/battlerites/:br_id')
 
 		.get(function(req, res) {
 			Battlerite.find({
-				champ_id: req.params.champ_id,
+				champion: req.params.champ,
 				_id: req.params.br_id
 			}, function(err, battlerite) {
 				if (err) { res.send(err); }
@@ -126,7 +126,7 @@ module.exports = function(app) {
 		.post(function(req, res) {
 			var battlerite = new Battlerite();
 			battlerite.name = req.body.name;
-			battlerite.champ_id = req.body.champ_id;
+			battlerite.champion = req.body.champion;
 			battlerite.portrait_url = req.body.portrait_url;
 			battlerite.desc = req.body.desc;
 			battlerite.tier = req.body.tier;
@@ -162,7 +162,7 @@ module.exports = function(app) {
 			Battlerite.findById(req.params.br_id, function(err, battlerite) {
 				if (err) { res.send(err); }
 				if (req.body.name) battlerite.name = req.body.name;
-				if (req.body.champ) battlerite.champ_id = req.body.champ_id;
+				if (req.body.champion) battlerite.champion = req.body.champion;
 				if (req.body.portraitURL) battlerite.portrait_url = req.body.portrait_url;
 				if (req.body.desc) battlerite.desc = req.body.desc;
 				if (req.body.tier) battlerite.tier = req.body.tier;

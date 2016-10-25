@@ -5,10 +5,10 @@ var Schema = mongoose.Schema;
 
 var BattleriteSchema = new Schema({
 	name: String,
-	champ_id: String,
+	champion: String,
 	portrait_url: String,
 	desc: String,
-	tier: Number,
+	tier: String,
 	type: String
 });
 

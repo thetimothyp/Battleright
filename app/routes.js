@@ -3,6 +3,7 @@ var XBBCODE = require('./services/parser/xbbcode');
 
 var Guide = require('./models/guide');
 var Champion = require('./models/champion');
+var Battlerite = require('./models/battlerite');
 
 module.exports = function(app, passport) {
 
@@ -83,10 +84,13 @@ module.exports = function(app, passport) {
 	// must be logged in to create a guide
 	app.get('/create', isLoggedIn, function(req, res) {
 		Champion.find(function(err, champions) {
-			res.render('create.ejs', {
-				user : req.user,
-				champions : champions
-			});
+			Battlerite.find(function(err, battlerites) {
+				res.render('create.ejs', {
+					user : req.user,
+					champions : champions,
+					battlerites : battlerites
+				});
+			})
 		})
 	});
 

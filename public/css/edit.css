@@ -2,3 +2,18 @@ ul {
 	list-style:none;
 	padding:0;
 }
+
+.battlerite img {
+	width: 64px;
+	height: 64px;
+	display: block;
+	margin: 0 auto;
+}
+
+.tier h4 {
+	text-align: center;
+}
+
+.tier textarea {
+	width: 100%;
+}
