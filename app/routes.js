@@ -98,7 +98,7 @@ module.exports = function(app, passport) {
 					});
 				})
 			})
-		})
+		}).sort({ name : 1 });
 	});
 
 	app.get('/guides', isUser, function(req, res) {
@@ -218,7 +218,7 @@ module.exports = function(app, passport) {
 			guide.f_comments = req.body.f_comments;
 			guide.ex1_comments = req.body.ex1_comments;
 			guide.ex2_comments = req.body.ex2_comments;
-			
+
 			for (var i = 0; i < req.body.ch_title.length; i++) {
 				console.log(req.body);
 				var ch = {

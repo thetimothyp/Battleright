@@ -188,8 +188,8 @@ module.exports = function(app) {
 				if (req.body.portrait_url) ability.portrait_url = req.body.portrait_url;
 				if (req.body.desc) ability.desc = req.body.desc;
 				if (req.body.type) ability.type = req.body.type;
-				if (req.body.type) ability.cooldown = req.body.cooldown;
-				if (req.body.type) ability.key_binding = req.body.key_binding;
+				if (req.body.cooldown) ability.cooldown = req.body.cooldown;
+				if (req.body.key_binding) ability.key_binding = req.body.key_binding;
 
 				ability.save(function(err) {
 					if (err) { res.send(err); }
