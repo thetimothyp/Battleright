@@ -27,7 +27,9 @@ var GuideSchema = new Schema({
 	q_comments : String,
 	e_comments : String,
 	r_comments : String,
-	f_comments : String
+	f_comments : String,
+	ex1_comments : String,
+	ex2_comments : String
 });
 
 module.exports = mongoose.model('Guide', GuideSchema);

@@ -149,6 +149,8 @@ module.exports = function(app, passport) {
 		guide.e_comments = req.body.e_comments;
 		guide.r_comments = req.body.r_comments;
 		guide.f_comments = req.body.f_comments;
+		guide.ex1_comments = req.body.ex1_comments;
+		guide.ex2_comments = req.body.ex2_comments;
 		guide.date = new Date();
 		guide.rating = 0;
 		guide.upvotes = 0;
@@ -214,6 +216,9 @@ module.exports = function(app, passport) {
 			guide.e_comments = req.body.e_comments;
 			guide.r_comments = req.body.r_comments;
 			guide.f_comments = req.body.f_comments;
+			guide.ex1_comments = req.body.ex1_comments;
+			guide.ex2_comments = req.body.ex2_comments;
+			
 			for (var i = 0; i < req.body.ch_title.length; i++) {
 				console.log(req.body);
 				var ch = {
