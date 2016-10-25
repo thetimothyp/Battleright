@@ -21,7 +21,7 @@ module.exports = function(app, passport) {
 					champions : champions
 				});
 			})
-		}).limit(10);
+		}).limit(10).sort({ date: -1 });
 	});
 
 	// =======================
@@ -138,6 +138,7 @@ module.exports = function(app, passport) {
 		guide.e_comments = req.body.e_comments;
 		guide.r_comments = req.body.r_comments;
 		guide.f_comments = req.body.f_comments;
+		guide.date = new Date();
 
 		for (var i = 0; i < req.body.ch_title.length; i++) {
 			var ch = {

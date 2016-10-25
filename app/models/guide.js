@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var GuideSchema = new Schema({
 	title: String,
 	champion: String,
+	date: Date,
 	user: String,
 	author: String,
 	chapters: [{
