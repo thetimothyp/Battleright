@@ -112,12 +112,23 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/guides/:champion', isUser, function(req, res) {
+		var sort = {};
+		sort[req.query.sortby] = -1;
+		console.log(req.query.sortby);
 		Guide.find({
 			champion : req.params.champion
 		}, function(err, guides) {
+			guides.sort(function(a, b) {
+				if (req.query.sortby == 'Rating')
+			    	return a.rating < b.rating;
+			    else
+			    	return a.date < b.date;
+			});
 			res.render('champion_guides.ejs', {
 				user : req.user,
-				guides : guides
+				guides : guides,
+				champion : req.params.champion,
+				req : req
 			})
 		})
 	})
