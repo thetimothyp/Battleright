@@ -139,6 +139,9 @@ module.exports = function(app, passport) {
 		guide.r_comments = req.body.r_comments;
 		guide.f_comments = req.body.f_comments;
 		guide.date = new Date();
+		guide.rating = 0;
+		guide.upvotes = 0;
+		guide.downvotes = 0;
 
 		for (var i = 0; i < req.body.ch_title.length; i++) {
 			var ch = {
@@ -220,6 +223,30 @@ module.exports = function(app, passport) {
 		})
 
 	})
+
+	app.post('/guides/:champion/:guide_id/upvote', isUser, function(req, res) {
+		
+		Guide.findById(req.params.guide_id, function(err, guide) {
+			guide.upvotes += 1;
+			guide.rating = guide.upvotes / (guide.upvotes + guide.downvotes);
+
+			guide.save(function(err) {
+				if(err) res.send(err);
+			})
+		});
+	});
+
+	app.post('/guides/:champion/:guide_id/downvote', isUser, function(req, res) {
+		
+		Guide.findById(req.params.guide_id, function(err, guide) {
+			guide.downvotes += 1;
+			guide.rating = guide.upvotes / (guide.upvotes + guide.downvotes);
+
+			guide.save(function(err) {
+				if(err) res.send(err);
+			})
+		});
+	});
 
 	// =======================
 	// LOGOUT

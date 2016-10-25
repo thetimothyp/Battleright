@@ -4,6 +4,7 @@
 <head>
     <title>Battleright</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -46,8 +47,10 @@
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6 col-sm-offset-3">
             <div class="well">
+                <h3><%= guides[0].champion %> Guides</h3>
+                <hr>
                 <% for (var i = 0; i < guides.length; i++) { %>
-                    <p><a href="/guides/<%= guides[i].champion %>/<%= guides[i]._id %>"><%= guides[i].title %></a></p>
+                    <p><a href="/guides/<%= guides[i].champion %>/<%= guides[i]._id %>"><%= guides[i].title %></a> by <%= guides[i].author %></p>
                 <% } %>
             </div>
         </div>

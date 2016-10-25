@@ -59,6 +59,13 @@
                         <h2><%= guide.title %></h2>
                         <h4> by <%= guide.author %></h4>
                     </div>
+                    <div class="vote">
+                        <button style="display:inline-block" class="btn btn-success upvote">+</button>
+                        <button style="display:inline-block" class="btn btn-danger downvote">-</button>
+                    </div>
+                    <div class="score">
+                        <h3><%= (guide.rating * 100).toFixed(0) %>% (<%=guide.upvotes + guide.downvotes%> votes)</h3>
+                    </div>
                 </div>
                 <hr>
                     <div class="row">
@@ -458,6 +465,27 @@
 <script>
     getBattlerites("<%= guide.champion %>");
     getAbilities("<%= guide.champion %>");
+</script>
+<script>
+    $('.upvote').on('click', function(e) {
+        var loc = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+        var path = loc + "/guides/<%=guide.champion%>/<%=guide._id%>/upvote";
+        httpPostAsync(path, function() {
+            console.log('hi');
+        });
+        this.disabled = true;
+        $('.downvote').prop('disabled', true);
+    });
+
+    $('.downvote').on('click', function(e) {
+        var loc = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+        var path = loc + "/guides/<%=guide.champion%>/<%=guide._id%>/downvote";
+        httpPostAsync(path, function() {
+            console.log('hi');
+        });
+        this.disabled = true;
+        $('.upvote').prop('disabled', true);
+    })
 </script>
 
 </body>

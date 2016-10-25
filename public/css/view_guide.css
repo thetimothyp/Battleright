@@ -9,6 +9,14 @@
 	display: flex;
 }
 
+.vote {
+	align-self: center;
+}
+
+.score {
+	margin: 0 1em;
+}
+
 #portrait {
 	height: 64px;
 	display: inline-block;
