@@ -462,31 +462,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="/scripts/battlerites.js"></script>
+<script src="/scripts/vote.js"></script>
 <script>
     getBattlerites("<%= guide.champion %>");
     getAbilities("<%= guide.champion %>");
+    attachVoteHandlers("<%=guide.champion%>","<%=guide._id%>");
 </script>
-<script>
-    $('.upvote').on('click', function(e) {
-        var loc = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-        var path = loc + "/guides/<%=guide.champion%>/<%=guide._id%>/upvote";
-        httpPostAsync(path, function() {
-            console.log('hi');
-        });
-        this.disabled = true;
-        $('.downvote').prop('disabled', true);
-    });
 
-    $('.downvote').on('click', function(e) {
-        var loc = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-        var path = loc + "/guides/<%=guide.champion%>/<%=guide._id%>/downvote";
-        httpPostAsync(path, function() {
-            console.log('hi');
-        });
-        this.disabled = true;
-        $('.upvote').prop('disabled', true);
-    })
-</script>
 
 </body>
 </html>
