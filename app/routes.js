@@ -21,7 +21,7 @@ module.exports = function(app, passport) {
 					champions : champions
 				});
 			})
-		})
+		}).limit(10);
 	});
 
 	// =======================
