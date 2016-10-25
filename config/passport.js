@@ -43,6 +43,8 @@ module.exports = function(passport) {
 						return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
 					} else if (user2) {
 						return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+					} else if (password.length < 5) {
+						return done(null, false, req.flash('signupMessage', 'Password must be at least 5 characters.'));
 					} else {
 						var newUser = new User();
 
