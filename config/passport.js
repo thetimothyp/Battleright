@@ -36,22 +36,27 @@ module.exports = function(passport) {
 	function(req, email, password, done) {
 		process.nextTick(function() {
 			User.findOne({ 'local.email' : email }, function(err, user) {
-				if (err) { return done(err); }
+				User.findOne({ 'local.username' : req.body.username }, function(err, user2) {
+					if (err) { return done(err); }
 
-				if (user) {
-					return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-				} else {
-					var newUser = new User();
+					if (user) {
+						return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+					} else if (user2) {
+						return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+					} else {
+						var newUser = new User();
 
-					newUser.local.email = email;
-					newUser.local.password = newUser.generateHash(password);
-					newUser.local.username = req.body.username;
+						newUser.local.email = email;
+						newUser.local.password = newUser.generateHash(password);
+						newUser.local.username = req.body.username;
 
-					newUser.save(function(err) {
-						if(err) { throw err; }
-						return done(null, newUser);
-					});
-				}
+						newUser.save(function(err) {
+							if(err) { throw err; }
+							return done(null, newUser);
+						});
+					}
+				});
+				
 			});
 		});
 	}));
