@@ -14,6 +14,7 @@ var champion = $('select option:selected').text();
                 $("#" + br.tier + " .br-title").text(br.name);
                 $("#" + br.tier + " .br-desc").text(br.desc);
                 $("#" + br.tier + " .br-type").text(br.type);
+                $("#" + br.tier + " .br-img").attr("src", br.portrait_url);
             })
         })
     }

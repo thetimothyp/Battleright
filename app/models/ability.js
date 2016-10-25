@@ -1,0 +1,20 @@
+// app/models/ability.js
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var AbilitySchema = new Schema({
+	name: String,
+	champion: String,
+	portrait_url: String,
+	desc: String,
+	type: String,
+	affects: String,
+	cooldown: Number,
+	cast_time: Number,
+	energy_cost: Number,
+	energy_gain: Number,
+	key_binding: String
+});
+
+module.exports = mongoose.model('Battlerite', AbilitySchema);

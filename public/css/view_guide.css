@@ -4,3 +4,27 @@
 	margin: 2em auto;
 	padding: 1.5em;
 }
+
+.title-cn {
+	display: flex;
+}
+
+#portrait {
+	height: 64px;
+	display: inline-block;
+	align-self: center;
+}
+
+.br-type {
+	color: #888;
+}
+
+.byline {
+	display: inline-block;
+	align-self: center;
+	margin: 0 1em;
+}
+
+.byline h4, h2 {
+	margin: 0;
+}

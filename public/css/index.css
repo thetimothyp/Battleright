@@ -4,10 +4,14 @@ body {
 }
 
 .well {
-	background-color: rgba(40,30,0,0.95);
+	background-color: rgba(20,20,20,0.9);
 	border: none;
 }
 
 .well h1, h3, p {
 	color: white;
+}
+
+.champion-tile {
+	display: inline-block;
 }

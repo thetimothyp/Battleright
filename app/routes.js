@@ -13,10 +13,13 @@ module.exports = function(app, passport) {
 	app.get('/', isUser, function(req, res) {
 		Guide.find(function(err, guides) {
 			if (err) res.send(err);
-			res.render('index.ejs', {
-				user : req.user,
-				guides : guides
-			});
+			Champion.find(function(err, champions) {
+				res.render('index.ejs', {
+					user : req.user,
+					guides : guides,
+					champions : champions
+				});
+			})
 		})
 	});
 

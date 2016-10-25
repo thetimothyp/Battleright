@@ -163,7 +163,7 @@ module.exports = function(app) {
 				if (err) { res.send(err); }
 				if (req.body.name) battlerite.name = req.body.name;
 				if (req.body.champion) battlerite.champion = req.body.champion;
-				if (req.body.portraitURL) battlerite.portrait_url = req.body.portrait_url;
+				if (req.body.portrait_url) battlerite.portrait_url = req.body.portrait_url;
 				if (req.body.desc) battlerite.desc = req.body.desc;
 				if (req.body.tier) battlerite.tier = req.body.tier;
 				if (req.body.type) battlerite.type = req.body.type;
