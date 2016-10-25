@@ -83,7 +83,7 @@
                                 <p class="br-desc"></p>
                             </div>
                             <h5>Tier 1 comments:</h5>
-                            <textarea name="tier1comments" rows="10"></textarea>
+                            <textarea name="tier1comments" rows="5"></textarea>
                         </div>
                         <hr>
                         <div class="tier" id="tier2">
@@ -107,7 +107,7 @@
                                 <p class="br-desc"></p>
                             </div>
                             <h5>Tier 2 comments:</h5>
-                            <textarea name="tier2comments" rows="10"></textarea>
+                            <textarea name="tier2comments" rows="5"></textarea>
                         </div>
                         <hr>
                         <div class="tier" id="tier3">
@@ -131,7 +131,7 @@
                                 <p class="br-desc"></p>
                             </div>
                             <h5>Tier 3 comments:</h5>
-                            <textarea name="tier3comments" rows="10"></textarea>
+                            <textarea name="tier3comments" rows="5"></textarea>
                         </div>
                         <hr>
                         <div class="tier" id="tier4">
@@ -155,7 +155,7 @@
                                 <p class="br-desc"></p>
                             </div>
                             <h5>Tier 4 comments:</h5>
-                            <textarea name="tier4comments" rows="10"></textarea>
+                            <textarea name="tier4comments" rows="5"></textarea>
                         </div>
                         <hr>
                         <div class="tier" id="tier5">
@@ -173,7 +173,7 @@
                                 <p class="br-desc"></p>
                             </div>
                             <h5>Tier 5 comments:</h5>
-                            <textarea name="tier5comments" rows="10"></textarea>
+                            <textarea name="tier5comments" rows="5"></textarea>
                         </div>
                     </div>
                     </div>
@@ -203,37 +203,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="/scripts/edit.js"></script>
-<script>
-    var champion = $('select option:selected').text();
-    getBattlerites(champion);
-    $('select').on('change', function(e) {
-        champion = $('select option:selected').text();
-        getBattlerites(champion);
-    })
-
-    function getBattlerites(champion) {
-        var loc = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
-        var path = loc + "/api/champions/" + champion + "/battlerites";
-        httpGetAsync(path, function(data) {
-            $.each(JSON.parse(data), function(i, br) {
-                console.log(br);
-                $("#" + br.tier + " .br-title").text(br.name);
-                $("#" + br.tier + " .br-desc").text(br.desc);
-                $("#" + br.tier + " .br-type").text(br.type);
-            })
-        })
-    }
-
-    function httpGetAsync(theUrl, callback)
-    {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() { 
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                callback(xmlHttp.responseText);
-        }
-        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-        xmlHttp.send(null);
-    }
-</script>
+<script src="/scripts/battlerites.js"></script>
 </body>
 </html>

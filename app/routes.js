@@ -119,6 +119,12 @@ module.exports = function(app, passport) {
 		var guide = new Guide();
 		guide.title = req.body.title;
 		guide.champion = req.body.champion;
+		guide.tier1comments = req.body.tier1comments;
+		guide.tier2comments = req.body.tier2comments;
+		guide.tier3comments = req.body.tier3comments;
+		guide.tier4comments = req.body.tier4comments;
+		guide.tier5comments = req.body.tier5comments;
+
 		for (var i = 0; i < req.body.ch_title.length; i++) {
 			var ch = {
 				title: req.body.ch_title[i],
@@ -166,6 +172,11 @@ module.exports = function(app, passport) {
 			if(err) res.send(err);
 
 			guide.title = req.body.title;
+			guide.tier1comments = req.body.tier1comments;
+			guide.tier2comments = req.body.tier2comments;
+			guide.tier3comments = req.body.tier3comments;
+			guide.tier4comments = req.body.tier4comments;
+			guide.tier5comments = req.body.tier5comments;
 			for (var i = 0; i < req.body.ch_title.length; i++) {
 				var ch = {
 					title: req.body.ch_title[i],

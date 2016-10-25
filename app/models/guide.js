@@ -11,7 +11,12 @@ var GuideSchema = new Schema({
 	chapters: [{
 		title: String,
 		body: String
-	}]
+	}],
+	tier1comments : String,
+	tier2comments : String,
+	tier3comments : String,
+	tier4comments : String,
+	tier5comments : String
 });
 
 module.exports = mongoose.model('Guide', GuideSchema);
