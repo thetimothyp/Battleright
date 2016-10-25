@@ -4,6 +4,7 @@ var XBBCODE = require('./services/parser/xbbcode');
 var Guide = require('./models/guide');
 var Champion = require('./models/champion');
 var Battlerite = require('./models/battlerite');
+var Ability = require('./models/ability');
 
 module.exports = function(app, passport) {
 
@@ -88,11 +89,14 @@ module.exports = function(app, passport) {
 	app.get('/create', isLoggedIn, function(req, res) {
 		Champion.find(function(err, champions) {
 			Battlerite.find(function(err, battlerites) {
-				res.render('create.ejs', {
-					user : req.user,
-					champions : champions,
-					battlerites : battlerites
-				});
+				Ability.find(function(err, abilities) {
+					res.render('create.ejs', {
+						user : req.user,
+						champions : champions,
+						battlerites : battlerites,
+						abilities : abilities
+					});
+				})
 			})
 		})
 	});
@@ -127,6 +131,13 @@ module.exports = function(app, passport) {
 		guide.tier3comments = req.body.tier3comments;
 		guide.tier4comments = req.body.tier4comments;
 		guide.tier5comments = req.body.tier5comments;
+		guide.lmb_comments = req.body.lmb_comments;
+		guide.rmb_comments = req.body.rmb_comments;
+		guide.space_comments = req.body.space_comments;
+		guide.q_comments = req.body.q_comments;
+		guide.e_comments = req.body.e_comments;
+		guide.r_comments = req.body.r_comments;
+		guide.f_comments = req.body.f_comments;
 
 		for (var i = 0; i < req.body.ch_title.length; i++) {
 			var ch = {

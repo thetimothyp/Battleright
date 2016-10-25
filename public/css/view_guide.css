@@ -28,3 +28,29 @@
 .byline h4, h2 {
 	margin: 0;
 }
+
+.ab-header-cn {
+	display: flex;
+	margin-bottom: 1em;
+}
+
+.ab-img {
+	width: 64px;
+	height: 64px;
+	display: inline-block;
+	align-self:center;
+}
+
+.ab-header {
+	display: inline-block;
+	align-self:center;
+	margin-left: 1em;
+}
+
+.ab-header h6 {
+	margin: 0.2em 0;
+}
+
+.ability textarea {
+	width: 100%;
+}

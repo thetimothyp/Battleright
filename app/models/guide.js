@@ -16,7 +16,14 @@ var GuideSchema = new Schema({
 	tier2comments : String,
 	tier3comments : String,
 	tier4comments : String,
-	tier5comments : String
+	tier5comments : String,
+	lmb_comments : String,
+	rmb_comments : String,
+	space_comments : String,
+	q_comments : String,
+	e_comments : String,
+	r_comments : String,
+	f_comments : String
 });
 
 module.exports = mongoose.model('Guide', GuideSchema);

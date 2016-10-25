@@ -9,12 +9,8 @@ var AbilitySchema = new Schema({
 	portrait_url: String,
 	desc: String,
 	type: String,
-	affects: String,
 	cooldown: Number,
-	cast_time: Number,
-	energy_cost: Number,
-	energy_gain: Number,
 	key_binding: String
 });
 
-module.exports = mongoose.model('Battlerite', AbilitySchema);
+module.exports = mongoose.model('Ability', AbilitySchema);
