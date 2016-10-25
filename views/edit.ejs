@@ -7,12 +7,40 @@
     <link rel="stylesheet" type="text/css" href="/css/edit.css">
 </head>
 <body>
-<div class="container">
-
-    <div class="page-header text-center">
-        <h1>Edit Guide</h1>
-        <a href="/profile" class="btn btn-default btn-sm">Profile</a>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Battleright</a>
     </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/guides">All Guides</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if (user == 0) { %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+        <% } else {%>
+            <li><a href="/profile/guides">My Guides</a></li>
+            <li class="active"><a href="/create">New Guide</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Log Out</a></li>
+        <% } %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
 
     <div class="row">
 
@@ -26,6 +54,167 @@
                 <form action="/guides/<%=guide.champion%>/<%=guide._id%>/edit" method="post" id="guide">
                     Guide Title: <input type="text" name="title" value="<%= guide.title %>"><hr>
                     Champion: <%= guide.champion %>
+                    <hr>
+                    <div class="row">
+                        <div id="abilities">
+                            <h3>Abilities</h3><hr>
+                            <div class="ability row" id="LMB">
+                                <div class="col-sm-4 ability-tile">
+                                    <div class="row">
+                                        <div class="ab-header-cn">
+                                            <img class="ab-img">
+                                            <div class="ab-header">
+                                                <h5><span class="ab-title"></span> (<span class="ab-key-binding">LMB</span>)</h5>
+                                                <h6 class="ab-type"></h6>
+                                                <h6>Cooldown: <span class="ab-cooldown"></span>s</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="ab-desc"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h5>Notes:</h5>
+                                    <textarea name="lmb_comments" rows=6><%= guide.lmb_comments %></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="ability row" id="RMB">
+                                <div class="col-sm-4 ability-tile">
+                                    <div class="row">
+                                        <div class="ab-header-cn">
+                                            <img class="ab-img">
+                                            <div class="ab-header">
+                                                <h5><span class="ab-title"></span> (<span class="ab-key-binding">RMB</span>)</h5>
+                                                <h6 class="ab-type"></h6>
+                                                <h6>Cooldown: <span class="ab-cooldown"></span>s</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="ab-desc"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h5>Notes:</h5>
+                                    <textarea name="rmb_comments" rows=6><%= guide.rmb_comments %></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="ability row" id="Space">
+                                <div class="col-sm-4 ability-tile">
+                                    <div class="row">
+                                        <div class="ab-header-cn">
+                                            <img class="ab-img">
+                                            <div class="ab-header">
+                                                <h5><span class="ab-title"></span> (<span class="ab-key-binding">Space</span>)</h5>
+                                                <h6 class="ab-type"></h6>
+                                                <h6>Cooldown: <span class="ab-cooldown"></span>s</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="ab-desc"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h5>Notes:</h5>
+                                    <textarea name="space_comments" rows=6><%= guide.space_comments %></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="ability row" id="Q">
+                                <div class="col-sm-4 ability-tile">
+                                    <div class="row">
+                                        <div class="ab-header-cn">
+                                            <img class="ab-img">
+                                            <div class="ab-header">
+                                                <h5><span class="ab-title"></span> (<span class="ab-key-binding">Q</span>)</h5>
+                                                <h6 class="ab-type"></h6>
+                                                <h6>Cooldown: <span class="ab-cooldown"></span>s</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="ab-desc"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h5>Notes:</h5>
+                                    <textarea name="q_comments" rows=6><%= guide.q_comments %></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="ability row" id="E">
+                                <div class="col-sm-4 ability-tile">
+                                    <div class="row">
+                                        <div class="ab-header-cn">
+                                            <img class="ab-img">
+                                            <div class="ab-header">
+                                                <h5><span class="ab-title"></span> (<span class="ab-key-binding">E</span>)</h5>
+                                                <h6 class="ab-type"></h6>
+                                                <h6>Cooldown: <span class="ab-cooldown"></span>s</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="ab-desc"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h5>Notes:</h5>
+                                    <textarea name="e_comments" rows=6><%= guide.e_comments %></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="ability row" id="R">
+                                <div class="col-sm-4 ability-tile">
+                                    <div class="row">
+                                        <div class="ab-header-cn">
+                                            <img class="ab-img">
+                                            <div class="ab-header">
+                                                <h5><span class="ab-title"></span> (<span class="ab-key-binding">R</span>)</h5>
+                                                <h6 class="ab-type"></h6>
+                                                <h6>Cooldown: <span class="ab-cooldown"></span>s</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="ab-desc"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h5>Notes:</h5>
+                                    <textarea name="r_comments" rows=6><%= guide.r_comments %></textarea>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="ability row" id="F">
+                                <h4>Ultimate Ability</h4>
+                                <div class="col-sm-4 ability-tile">
+                                    <div class="row">
+                                        <div class="ab-header-cn">
+                                            <img class="ab-img">
+                                            <div class="ab-header">
+                                                <h5><span class="ab-title"></span> (<span class="ab-key-binding">F</span>)</h5>
+                                                <h6 class="ab-type"></h6>
+                                                <h6>Cooldown: <span class="ab-cooldown"></span>s</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p class="ab-desc"></p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <h5>Notes:</h5>
+                                    <textarea name="f_comments" rows=6><%= guide.f_comments %></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                     <div id="battlerites">
                         <h3>Battlerites</h3><hr>
                         <div class="tier" id="tier1">
@@ -165,6 +354,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="/scripts/edit.js"></script>
 <script src="/scripts/battlerites.js"></script>
-<script>getBattlerites("<%= guide.champion %>");</script>
+<script>
+getBattlerites("<%= guide.champion %>");
+getAbilities("<%= guide.champion %>");
+</script>
 </body>
 </html>

@@ -172,16 +172,17 @@ module.exports = function(app, passport) {
 		});
 	})
 
-	app.get('/guides/:champion/:guide_id/edit', isLoggedIn, function(req, res) {
+	app.get('/guides/:champion/:guide_id/edit', isLoggedIn, isUser, function(req, res) {
 		Guide.findById(req.params.guide_id, function(err, guide) {
 			if(err) res.send(err);
 			res.render('edit.ejs', {
-				guide : guide
+				guide : guide,
+				user : req.user
 			});
 		});
 	})
 
-	app.post('/guides/:champion/:guide_id/edit', isLoggedIn, function(req, res) {
+	app.post('/guides/:champion/:guide_id/edit', isLoggedIn, processEdits, function(req, res) {
 		Guide.findById(req.params.guide_id, function(err, guide) {
 			if(err) res.send(err);
 
@@ -191,7 +192,15 @@ module.exports = function(app, passport) {
 			guide.tier3comments = req.body.tier3comments;
 			guide.tier4comments = req.body.tier4comments;
 			guide.tier5comments = req.body.tier5comments;
+			guide.lmb_comments = req.body.lmb_comments;
+			guide.rmb_comments = req.body.rmb_comments;
+			guide.space_comments = req.body.space_comments;
+			guide.q_comments = req.body.q_comments;
+			guide.e_comments = req.body.e_comments;
+			guide.r_comments = req.body.r_comments;
+			guide.f_comments = req.body.f_comments;
 			for (var i = 0; i < req.body.ch_title.length; i++) {
+				console.log(req.body);
 				var ch = {
 					title: req.body.ch_title[i],
 					body: req.body.ch_body[i]
@@ -238,7 +247,7 @@ function isUser(req, res, next) {
 }
 
 function processEdits(req, res, next) {
-	if( Object.prototype.toString.call(req.body.content) != '[object Array]' ) {
+	if( Object.prototype.toString.call(req.body.ch_title) != '[object Array]' ) {
 		req.body.ch_body = [].concat(req.body.ch_body);
 		req.body.ch_title = [].concat(req.body.ch_title);
 	}
