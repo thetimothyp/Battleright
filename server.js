@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use(session({ 
 		secret: 'C30C7A73-5E4D-4291-9630-35FF28FB819B' ,
 		cookie : {
-			_expires : 600000
+			_expires : 6000000
 		}
 	})
 ); // session secret
